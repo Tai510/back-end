@@ -26,4 +26,4 @@ function findById(id) {
     .select('id', 'username')
     .where({ id })
     .first();
-}
+};
