@@ -52,17 +52,18 @@ router.post('/login', (req, res) => {
     })
   })
 
-  // router.put('/loggedIn-users/:id', (req, res) => {
-  //   let user = req.body;
-  //   Users.update(req.params.id , user)
-  // })
-  // .then( edited => {
-  //   res.json({edited})
-  // }) 
-  // .catch(error => {
-  //   res.status(500).json(error);
-  // })
-
+  
+  router.get('/contacts', (req, res) => {
+    let user = req.body;
+  
+    Users.find(user)
+    .then( saved => {
+      res.status(201).json(saved);
+    })
+    .catch(error => {
+      res.status(500).json(error);
+    })
+  })
  
 
 module.exports = router;
