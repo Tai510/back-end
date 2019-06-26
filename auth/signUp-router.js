@@ -29,7 +29,7 @@ router.post('/login', (req, res) => {
           res.status(200).json({
             message: `Welcome ${user.username}!, have a token...`,
             token,
-            roles: token.roles,
+            roles: token.roles
           });
         } else {
           res.status(401).json({ message: 'Invalid Credentials' });
@@ -39,6 +39,29 @@ router.post('/login', (req, res) => {
         res.status(500).json(error);
       });
   });
+
+  router.get('/loggedIn-users', (req, res) => {
+    let user = req.body;
+  
+    Users.find(user)
+    .then( saved => {
+      res.status(201).json(saved);
+    })
+    .catch(error => {
+      res.status(500).json(error);
+    })
+  })
+
+  // router.put('/loggedIn-users/:id', (req, res) => {
+  //   let user = req.body;
+  //   Users.update(req.params.id , user)
+  // })
+  // .then( edited => {
+  //   res.json({edited})
+  // }) 
+  // .catch(error => {
+  //   res.status(500).json(error);
+  // })
 
  
 

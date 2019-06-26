@@ -12,8 +12,19 @@ server.use('/', userRouter);
 
 
 server.get('/', (req, res) => {
-  res.status(200).json({ api: 'running' });
+  res.status(200).json({Title: 'Build Week'});
 });
+
+
+
+server.post('/users', (req, res) => {
+  users.insert(req.body)
+  .then(users => {
+    res.json(users);
+  }).catch(err => res.send(err));
+})
+
+
 
 
 

@@ -11,6 +11,7 @@ const checkRole = require('../auth/check-role-middleware.js');
       })
       .catch(err => res.send(err));
   });
+
   
     router.get('/:id', restricted, checkRole('users'), (req, res) => {
     Users.findById(req.params.id)

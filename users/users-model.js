@@ -2,6 +2,7 @@ const db = require('../data/dbConfig.js');
 
 module.exports = {
   add,
+  update,
   find,
   findBy,
   findById,
@@ -27,3 +28,9 @@ function findById(id) {
     .where({ id })
     .first();
 };
+
+function update(id, changes) {
+  return db('users')
+  .where({ id })
+  .update( changes);
+}
