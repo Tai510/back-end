@@ -20,6 +20,7 @@ const checkRole = require('../auth/check-role-middleware.js');
       })
       .catch(err => res.send(err));
   });
-  
+
+
   module.exports = router;
   
