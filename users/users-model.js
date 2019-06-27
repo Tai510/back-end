@@ -29,8 +29,8 @@ function findById(id) {
     .first();
 };
 
-function update(id, changes) {
-  return db('users')
-  .where({ id })
-  .update( changes);
+function update(id, changes)   {
+  const [id] = db('users'.update(changes))
+
+  return findById(id)
 }
