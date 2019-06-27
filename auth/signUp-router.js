@@ -53,7 +53,7 @@ router.post('/login', (req, res) => {
   })
 
   
-  router.get('/contacts/:id', (req, res) => {
+  router.get('/loggedIn-users/:id', (req, res) => {
     let user = req.body.id
   
     Users.findById(user)
@@ -66,28 +66,21 @@ router.post('/login', (req, res) => {
     })
   })
  
-  router.put('/contacts/:id', async (req, res) => {
-    try {
-      const hub = await Hubs.update(req.params.id, req.body);
-      if (hub) {
-        res.status(200).json(hub);
-      } else {
-        res.status(404).json({ message: 'The hub could not be found' });
-      }
-    } catch (error) {
-      // log error to server
-      console.log(error);
-      res.status(500).json({
-        message: 'Error updating the hub',
-      });
-    }
+  router.put('/loggedIn-users/:id', (req, res) => {
+    const id = req.params.id;
+    const newUser = req.body;
+    db.update(id, newUser).then(count => {
+      res.status(200).json(newUser);
+    }).catch(err => {
+      res.status(500).json({error: "user could not be updated"})
+    })
   });
 
-  router.post('/contacts/:id', async (req, res) => {
+  router.post('/loggedIn-users/:id', async (req, res) => {
     const contact_List = { ...req.body, hub_id: req.params.id };
   
     try {
-      const message = await Messages.add(contact_List);
+      const message = await db.add(contact_List);
       res.status(210).json(message);
     } catch (error) {
       // log error to server
