@@ -16,6 +16,7 @@ router.post('/random', (req, res) => {
        .insert(req.body)
        .then(result => {
            res.json(result)
+           console.log(req.body)
        })
        .catch(error => {
            res.status(500).json({ message: 'Internal server error'})
