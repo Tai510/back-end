@@ -4,12 +4,14 @@ const server = express();
 const cors = require('cors');
 const userRouter = require('../auth/signUp-router')
 const contactRouter = require('../contact.js')
+const randomRouter = require('../random.js')
 
 server.use(express.json());
 server.use(helmet());
 server.use(cors());
 server.use('/', userRouter);
 server.use('/', contactRouter);
+server.use('/', randomRouter);
 
 
 
