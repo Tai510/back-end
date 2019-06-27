@@ -76,19 +76,15 @@ router.post('/login', (req, res) => {
     })
   });
 
-  router.post('/loggedIn-users/:id', async (req, res) => {
-    const contact_List = { ...req.body, hub_id: req.params.id };
-  
-    try {
-      const message = await db.add(contact_List);
-      res.status(210).json(message);
-    } catch (error) {
-      // log error to server
-      console.log(error);
-      res.status(500).json({
-        message: 'Error getting the messages for the hub',
-      });
-    }
+  router.post('/loggedIn-users/:id', (req, res) => {
+   db('newUser')
+   .insert(req.body, 'id')
+   .then(ids => {
+    res.status(201).json(ids);
+   }).catch(error => {
+     res.status(500).json(error);
+   })
+ 
   });
 
 module.exports = router;

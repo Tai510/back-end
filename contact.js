@@ -3,7 +3,6 @@ const router = require('express').Router();
 const db = require('./data/dbConfig.js');
 
 router.get("/contacts", (req, res) => {
-    console.log('im here')
     db("contacts")
       .then(contacts => {
         res.status(200).json(contacts);
@@ -14,7 +13,6 @@ router.get("/contacts", (req, res) => {
   });
 
 router.post('/contacts', (req, res) => {
-    console.log('im here')
    db('contacts')
        .insert(req.body)
        .then(result => {
@@ -43,12 +41,11 @@ router.get("/contacts/:id", (req, res) => {
   });
 
 router.put("/contacts/:id", (req, res) => {
-    console.log('ahahaha')
     db("contacts")
       .where({ id: req.params.id })
       .update(req.body)
       .then(count => {
-        if (count > 0) {
+        if (countlength > 0) {
           res.status(200).json({
             message: `${count} ${count > 1 ? "contact" : "contact"} updated`
           });
@@ -60,6 +57,27 @@ router.put("/contacts/:id", (req, res) => {
         res.status(500).json(err);
       });
   });
+
+router.delete("/contacts/:id", (req, res) => {
+    const contactid = req.params.id;
+    db("contacts")
+      .where({ id: contactid })
+      .del()
+      .then(count => {
+        if (count > 0) {
+          res.status(200).json({
+            message: `${count} ${count > 1 ? "records" : "record"} deleted`
+          });
+        } else {
+          res.status(400).json({ message: "No such contacts exists" });
+        }
+      })
+   
+      .catch(err => {
+        console.log(err);
+        res.status(500).json(err);
+      });
+   });
 
 
   module.exports = router;
