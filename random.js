@@ -7,8 +7,6 @@ function getRandomInt(max) {
 
 router.get("/random",  (req, res) => {
     db.raw('SELECT * from random order by random() limit 1').then(random =>{
-           // let id = getRandomInt(random.length)+1;
-            //let response = await db('random').where({'id': id })
     res.status(200).json(random.rows)
       })
       .catch(err => {
@@ -45,6 +43,6 @@ router.post('/random', (req, res) => {
        .catch(error => {
            res.status(500).json({ message: error.message})
        })
-})
+});
 
 module.exports = router;
