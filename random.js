@@ -8,9 +8,9 @@ function getRandomInt(max) {
 router.get("/random",  (req, res) => {
     db("random")
       .then(async random => {
-             let id = getRandomInt(random.length)+1;
-             let response = await db('random').where({'users_id': id })
-    res.status(200).json(response)
+            // let id = getRandomInt(random.length)+1;
+            // let response = await db('random').where({'users_id': id })
+    res.status(200).json(random)
       })
       .catch(err => {
         res.status(500).json(err);
