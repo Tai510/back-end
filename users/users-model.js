@@ -3,6 +3,7 @@ const db = require('../data/dbConfig.js');
 module.exports = {
   add,
   update,
+  remove,
   find,
   findBy,
   findById,
@@ -29,8 +30,14 @@ function findById(id) {
     .first();
 };
 
-function update(id, changes)   {
-  const [id] = db('users'.update(changes))
+async function update(id, changes)   {
+  const [id] = await db('users').update(changes)
 
   return findById(id)
+}
+
+function remove(id) {
+  return db('users')
+    .where('id', id)
+    .del();
 }
