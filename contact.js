@@ -45,7 +45,7 @@ router.put("/contacts/:id", (req, res) => {
       .where({ id: req.params.id })
       .update(req.body)
       .then(count => {
-        if (countlength > 0) {
+        if (count.length > 0) {
           res.status(200).json({
             message: `${count} ${count > 1 ? "contact" : "contact"} updated`
           });
