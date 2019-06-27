@@ -6,17 +6,16 @@ function getRandomInt(max) {
    }
 
 router.get("/random",  (req, res) => {
-    db("random")
-      .then(async random => {
-            let id = getRandomInt(random.length)+1;
-            let response = await db('random').where({'id': id })
+    db.raw('SELECT * from random order by random() limit 1').then(random =>{
+           // let id = getRandomInt(random.length)+1;
+            //let response = await db('random').where({'id': id })
     res.status(200).json(random)
       })
       .catch(err => {
         res.status(500).json(err);
       });
   });
-
+  
   
 
   router.get("/random/:id", (req, res) => {
