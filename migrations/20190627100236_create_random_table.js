@@ -5,7 +5,7 @@ exports.up = function(knex, Promise) {
     random.integer('users_id')
         .unsigned()
         .notNullable()
-        .references('id')
+        .references('id.username')
         .inTable('users')
     random.string('text', 550)
     .notNullable();
