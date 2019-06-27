@@ -9,7 +9,7 @@ router.get("/random",  (req, res) => {
     db.raw('SELECT * from random order by random() limit 1').then(random =>{
            // let id = getRandomInt(random.length)+1;
             //let response = await db('random').where({'id': id })
-    res.status(200).json(random)
+    res.status(200).json(random.rows)
       })
       .catch(err => {
         res.status(500).json(err);
