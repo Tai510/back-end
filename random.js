@@ -44,7 +44,7 @@ router.post('/random', (req, res) => {
            console.log(req.body)
        })
        .catch(error => {
-           res.status(500).json({ message: 'Internal server error'})
+           res.status(500).json({ message: error.message})
        })
 })
 
