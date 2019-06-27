@@ -7,8 +7,6 @@ exports.up = function(knex, Promise) {
         .notNullable()
         .references('id')
         .inTable('users')
-        .onDelete('CASCADE')
-        .onUpdate('CASCADE');
     random.string('text', 550)
     .notNullable();
   })
